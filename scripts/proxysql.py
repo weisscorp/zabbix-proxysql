@@ -27,5 +27,5 @@ elif sys.argv[1] == 'get':
     cursor.execute(sql)
     result = cursor.fetchall()
     for server in result:
-        print({"status": server[0], "weight": int(server[1])})
+        print("{\"status\": \"" + server[0] + "\", \"weight\": " + server[1] + "}")
     sys.exit(0)
