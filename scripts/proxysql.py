@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 # -*- coding: utf-8
 
 import sys
@@ -14,13 +14,15 @@ connection = mysql.connector.connect(host=proxysql_host, port=proxysql_port, use
 cursor = connection.cursor()
 
 if sys.argv[1] == 'discovery':
-    cursor.execute("""SELECT `hostgroup_id`, `hostname`, `port`, `status`, `weight` 
+    cursor.execute("""SELECT `hostgroup_id`, `hostname`, `port`, `status`, `weight`
             FROM `runtime_mysql_servers`;""")
     result = cursor.fetchall()
     discovery = {"data":[]}
     for server in result:
         discovery["data"].append({"{#HOSTGROUP_ID}":int(server[0]), "{#SERVERNAME}":server[1], "{#SERVERPORT}":int(server[2])})
     print(json.dumps(discovery, indent=2, sort_keys=True))
+    cursor.close()
+    connection.close()
     sys.exit(0)
 elif sys.argv[1] == 'get':
     sql = "SELECT status, weight FROM runtime_mysql_servers WHERE hostgroup_id = \'"+ sys.argv[2] +"\' AND hostname = \'"+ sys.argv[3] +"\' AND port = \'"+ sys.argv[4] +"\';"
@@ -28,4 +30,6 @@ elif sys.argv[1] == 'get':
     result = cursor.fetchall()
     for server in result:
         print("{\"status\": \"" + server[0] + "\", \"weight\": " + server[1] + "}")
+    cursor.close()
+    connection.close()
     sys.exit(0)
