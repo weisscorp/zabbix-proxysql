@@ -57,7 +57,7 @@
                             <type>0</type>
                             <snmp_community/>
                             <snmp_oid/>
-                            <key>proxysql[get,{#HOSTGROUP_ID},{#SERVERNAME},{#SERVERPORT},status]</key>
+                            <key>proxysql[{#HOSTGROUP_ID},{#SERVERNAME},{#SERVERPORT},status]</key>
                             <delay>10s</delay>
                             <history>1d</history>
                             <trends>0</trends>
@@ -120,7 +120,7 @@
                             <type>0</type>
                             <snmp_community/>
                             <snmp_oid/>
-                            <key>proxysql[get,{#HOSTGROUP_ID},{#SERVERNAME},{#SERVERPORT},weight]</key>
+                            <key>proxysql[{#HOSTGROUP_ID},{#SERVERNAME},{#SERVERPORT},weight]</key>
                             <delay>10s</delay>
                             <history>1d</history>
                             <trends>365d</trends>
