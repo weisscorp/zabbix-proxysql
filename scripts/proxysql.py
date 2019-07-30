@@ -14,8 +14,7 @@ connection = mysql.connector.connect(host=proxysql_host, port=proxysql_port, use
 cursor = connection.cursor()
 
 if sys.argv[1] == 'discovery':
-    cursor.execute("""SELECT `hostgroup_id`, `hostname`, `port`, `status`, `weight`
-            FROM `runtime_mysql_servers`;""")
+    cursor.execute("""SELECT `hostgroup_id`, `hostname`, `port`, `status`, `weight` FROM `runtime_mysql_servers`;""")
     result = cursor.fetchall()
     discovery = {"data":[]}
     for server in result:
